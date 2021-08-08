@@ -1,13 +1,9 @@
 package com.learn.api.extractor;
 
-import com.learn.api.elements.AnnotationElement;
 import com.learn.api.elements.ParameterElement;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Parameter;
-import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ParameterExtractor {
 

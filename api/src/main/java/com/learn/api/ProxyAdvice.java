@@ -1,6 +1,5 @@
 package com.learn.api;
 
-import com.learn.api.elements.Element;
 import com.learn.api.elements.MethodElement;
 import com.learn.api.extractor.MethodExtractor;
 import org.aspectj.lang.ProceedingJoinPoint;
