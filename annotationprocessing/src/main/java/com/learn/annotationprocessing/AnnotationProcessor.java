@@ -2,7 +2,9 @@ package com.learn.annotationprocessing;
 
 import com.google.auto.service.AutoService;
 import com.learn.annotationprocessing.advices.AdviceFactory;
+import com.learn.annotationprocessing.annotations.Proxy;
 import com.learn.annotationprocessing.annotations.Trace;
+import com.learn.annotationprocessing.builder.AdviceBuilder;
 import com.learn.annotationprocessing.builder.PointcutsBuilder;
 
 import javax.annotation.processing.AbstractProcessor;
@@ -38,7 +40,9 @@ public class AnnotationProcessor extends AbstractProcessor {
         if(annotations.size() > 0) {
             pointcutsBuilder.build(processingEnv.getFiler());
             pointcutsBuilder.getAnnotationToPointcut().forEach((key, value) -> {
-                AdviceFactory.getInstance().getAdviceBuilder(key, annotationProcessingBasePackage, value).build(processingEnv.getFiler());
+                AdviceBuilder adviceBuilder = AdviceFactory.getInstance().getAdviceBuilder(key, annotationProcessingBasePackage, value);
+                if(adviceBuilder != null)
+                    adviceBuilder.build(processingEnv.getFiler());
             });
         }
 
@@ -47,7 +51,7 @@ public class AnnotationProcessor extends AbstractProcessor {
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
-        return Set.of(Trace.class.getCanonicalName());
+        return Set.of(Trace.class.getCanonicalName(), Proxy.class.getCanonicalName());
     }
 
     @Override
